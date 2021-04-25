@@ -8,6 +8,7 @@ import { api } from '../../services/api';
 import { convertDurationToTimeString } from '../../utils/convertDurationToTimeString';
 
 import style from './episode.module.scss'
+import { usePlayer } from '../../contexts/PlayerContext';
 
 type Episode = {
     id: string,
@@ -27,6 +28,7 @@ type EpisodesProps = {
 }
 
 export default function Episode({ episode }: EpisodesProps) {
+    const { play } = usePlayer();
     return (
         <div className={style.episode}>
             <div className={style.thumbnailContainer}>
@@ -43,7 +45,7 @@ export default function Episode({ episode }: EpisodesProps) {
                     objectFit="cover"
                 />
 
-                <button type="button">
+                <button type="button" onClick={() => play(episode)}>
                     <img src="/play.svg" alt="Tocar episódio" />
                 </button>
 
